@@ -42,6 +42,7 @@ class ParentController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
 
             // On enregistre les données de l'user en BDD
+            // TODO
             $userRepository->save($user, true);
 
             // On redirige l'utilisateur
@@ -53,6 +54,52 @@ class ParentController extends AbstractController
         // Passage des informations vers la vue
         return $this->render('parent/add.html.twig', [
             'form'  => $form->createView(),
+        ]);
+    }
+
+    #[Route('/edit/{id}', name: 'app_parent_edit')]
+    public function edit(User $user, Request $request, UserRepository $userRepository): Response
+    {
+        // Appel de l'objet formulaire pour affichage
+        $form = $this->createForm(ParentType::class, $user);
+
+        //Appel de la fonction qui doit faire matcher les informations en provenance du formulaire avec les attributs de l'objet
+        $form->handleRequest($request);
+
+        // Si le formulaire est soumis et valide
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            // On enregistre les données de l'user en BDD
+            // TODO
+            $userRepository->save($user, true);
+
+            // On redirige l'utilisateur
+            return $this->redirectToRoute('app_parent');
+
+        }
+        
+        
+        // Passage des informations vers la vue
+        return $this->render('parent/add.html.twig', [
+            'form'  => $form->createView(),
+        ]);
+    }
+
+
+    #[Route('/delete/{id}', name: 'app_parent_delete')]
+    public function delete(User $user, UserRepository $userRepository): Response
+    {
+        $userRepository->remove($user, true);
+
+        return $this->redirectToRoute('app_parent');
+    }
+
+    #[Route('/detail/{id}', name: 'app_parent_detail')]
+    public function detail(User $user, UserRepository $userRepository): Response
+    {
+        // Passage des informations vers la vue
+        return $this->render('parent/detail.html.twig', [
+            'user'    => $user,
         ]);
     }
 }

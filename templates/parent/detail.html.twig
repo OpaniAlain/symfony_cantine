@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ParentController!{% endblock %}
+
+{% block body %}
+
+
+    <table class='table table-bordered'>
+        <tr>
+            <td>Prénom</td>
+            <td>{{ user.firstname }}</td>
+        </tr>
+        <tr>
+            <td>Nom</td>
+            <td>{{ user.lastname }}</td>
+        </tr>
+        <tr>
+            <td>Email</td>
+            <td>{{ user.email }}</td>
+        </tr>
+        <tr>
+            <td>Mot de passe</td>
+            <td>{{ user.password }}</td>
+        </tr>
+    </table>
+
+    <a class='btn btn-primary' href="{{ path('app_parent') }}">Retour</a>
+
+
+{% endblock %}
