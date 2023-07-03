@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ParentController!{% endblock %}
+
+{% block body %}
+
+
+    <a class='btn btn-success' href="{{ path('app_parent_add') }}">Ajouter</a>
+
+
+
+    <table class='table table-bordered'>
+        {% for row in users %}
+            <tr>
+                <td>{{ row.firstname }} {{ row.lastname }}</td>
+                <td>{{ row.email }}</td>
+                <td>Action</td>
+            </tr>
+        {% endfor %}
+    </table>
+
+{% endblock %}

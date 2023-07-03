@@ -1,0 +1,58 @@
+<?php
+
+namespace App\Controller;
+
+use App\Entity\User;
+use App\Form\ParentType;
+use App\Repository\UserRepository;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
+
+#[Route('/parent')]
+class ParentController extends AbstractController
+{
+    #[Route('/', name: 'app_parent')]
+    public function index(UserRepository $userRepository): Response
+    {
+        // Récupération des informations en bdd
+        $users = $userRepository->findAll();
+        
+        // Passage des informations vers la vue
+        return $this->render('parent/index.html.twig', [
+            'users'    => $users,
+        ]);
+    }
+
+
+    #[Route('/add', name: 'app_parent_add')]
+    public function add(Request $request, UserRepository $userRepository): Response
+    {
+        // définition de l'objet user qui sera remplis
+        $user = new User();
+
+        // Appel de l'objet formulaire pour affichage
+        $form = $this->createForm(ParentType::class, $user);
+
+        //Appel de la fonction qui doit faire matcher les informations en provenance du formulaire avec les attributs de l'objet
+        $form->handleRequest($request);
+
+        // Si le formulaire est soumis et valide
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            // On enregistre les données de l'user en BDD
+            $userRepository->save($user, true);
+
+            // On redirige l'utilisateur
+            return $this->redirectToRoute('app_parent');
+
+        }
+        
+        
+        // Passage des informations vers la vue
+        return $this->render('parent/add.html.twig', [
+            'form'  => $form->createView(),
+        ]);
+    }
+}
