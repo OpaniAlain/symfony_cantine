@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ParentController!{% endblock %}
+
+{% block body %}
+
+
+    <a class='btn btn-success' href="{{ path('app_staff_add') }}">Ajouter</a>
+
+
+
+    <table class='table table-bordered'>
+        {% for row in staffs %}
+            <tr>
+                <td>{{ row.fistname }} {{ row.lastname }}</td>
+                <td>{{ row.job }}</td>
+                <td>
+                    <a href="{{ path('app_staff_detail', {'id':row.id}) }}" class='btn btn-warning fa-solid fa-magnifying-glass' title='Afficher'></a>
+                    <a href="{{ path('app_staff_edit', {'id':row.id}) }}" class='btn btn-primary fa fa-edit' title='Modification'></a>
+                    <a href="{{ path('app_staff_delete', {'id':row.id}) }}" class='btn btn-danger fa fa-trash' title='Supprimer'></a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+
+{% endblock %}

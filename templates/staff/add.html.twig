@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ParentController!{% endblock %}
+
+{% block body %}
+
+    {{ form_start(form) }}
+        {{ form_widget(form._token) }}
+        <p>
+            {{ form_label(form.fistname) }}
+            {{ form_widget(form.fistname) }}
+            {{ form_errors(form.fistname) }}
+        </p>
+
+        <p>
+            {{ form_label(form.lastname) }}
+            {{ form_widget(form.lastname) }}
+        </p>
+
+        <p>
+            {{ form_label(form.job) }}
+            {{ form_widget(form.job) }}
+        </p>
+
+
+        {{ form_widget(form.valid) }}
+
+    {{ form_end(form, {render_rest:false}) }}
+
+{% endblock %}
