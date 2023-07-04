@@ -1,4 +1,24 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
+    {{ form_label(form.firstname) }}
+    {{ form_widget(form.firstname) }}
+    {{ form_label(form.lastname) }}
+    {{ form_widget(form.lastname) }}
+    {{ form_label(form.age) }}
+    {{ form_widget(form.age) }}
+    {{ form_label(form.allergy) }}
+    {{ form_widget(form.allergy) }}
+
+    <div class="row">
+        <div class="col-6">
+            {{ form_label(form.user) }}
+            {{ form_widget(form.user) }}
+        </div>
+        <div class="col-6">
+            {{ form_label(form.menu) }}
+            {{ form_widget(form.menu) }}
+        </div>
+    </div>
+
+
     <button class="btn">{{ button_label|default('Save') }}</button>
 {{ form_end(form) }}

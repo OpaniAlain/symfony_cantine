@@ -22,6 +22,7 @@ header {
     box-shadow: 0px 0px 4px 3px rgba(0, 0, 0, 0.367);
     font-family: 'Fasthand', cursive;
     padding-bottom: 200px;
+    margin-bottom: 50px;
 }
 
 header h1 {
