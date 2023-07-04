@@ -30,4 +30,5 @@ header h1 {
     font-size: 70px;
     color: rgba(0, 0, 0, 0.586);
     background-color: rgba(255, 255, 255, 0.406);
+    box-shadow: 0px 0px 4px 1px rgba(0, 0, 0, 0.367);
 }
