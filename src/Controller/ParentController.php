@@ -8,6 +8,7 @@ use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 #[Route('/parent')]
@@ -17,7 +18,7 @@ class ParentController extends AbstractController
     public function index(UserRepository $userRepository): Response
     {
         // Récupération des informations en bdd
-        $users = $userRepository->findAll();
+        $users = $userRepository->getUserByRole('PARENT');
         
         // Passage des informations vers la vue
         return $this->render('parent/index.html.twig', [
@@ -27,7 +28,7 @@ class ParentController extends AbstractController
 
 
     #[Route('/add', name: 'app_parent_add')]
-    public function add(Request $request, UserRepository $userRepository): Response
+    public function add(Request $request, UserRepository $userRepository, UserPasswordHasherInterface $userPasswordHasher): Response
     {
         // définition de l'objet user qui sera remplis
         $user = new User();
@@ -38,11 +39,25 @@ class ParentController extends AbstractController
         //Appel de la fonction qui doit faire matcher les informations en provenance du formulaire avec les attributs de l'objet
         $form->handleRequest($request);
 
+        
+
         // Si le formulaire est soumis et valide
         if ($form->isSubmitted() && $form->isValid()) {
 
             // On enregistre les données de l'user en BDD
             // TODO
+            $user->setRoles(['ROLE_PARENT']);
+
+
+            $user->setPassword(
+                $userPasswordHasher->hashPassword(
+                    $user,
+                    $form->get('password')->getData()
+                )
+            );
+            
+
+
             $userRepository->save($user, true);
 
             // On redirige l'utilisateur
@@ -58,7 +73,7 @@ class ParentController extends AbstractController
     }
 
     #[Route('/edit/{id}', name: 'app_parent_edit')]
-    public function edit(User $user, Request $request, UserRepository $userRepository): Response
+    public function edit(User $user, Request $request, UserRepository $userRepository, UserPasswordHasherInterface $userPasswordHasher): Response
     {
         // Appel de l'objet formulaire pour affichage
         $form = $this->createForm(ParentType::class, $user);
@@ -70,7 +85,15 @@ class ParentController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
 
             // On enregistre les données de l'user en BDD
-            // TODO
+            $user->setRoles(['ROLE_PARENT']);
+            if ($form->get('password')->getData() != '') {
+                $user->setPassword(
+                    $userPasswordHasher->hashPassword(
+                        $user,
+                        $form->get('password')->getData()
+                    )
+                );
+            }
             $userRepository->save($user, true);
 
             // On redirige l'utilisateur
