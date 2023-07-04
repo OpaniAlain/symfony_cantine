@@ -27,12 +27,19 @@
             </a>
 
             <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
-                <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="{{ path('app_home') }}">Accueil</a>
-                <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="{{ path('app_parent') }}">Parent</a>
-                <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="{{ path('app_staff') }}">Personnel</a>
-                <a class="py-2 link-body-emphasis text-decoration-none" href="{{ path('app_menu_index') }}">Menu</a>
-                <a class="py-2 link-body-emphasis text-decoration-none" href="{{ path('app_child_index') }}">Enfant</a>
-                <a class="py-2 link-body-emphasis text-decoration-none" href="{{ path('app_user_index') }}">Admin</a>
+                {% if app.user %}
+                    <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="{{ path('app_home') }}">Accueil</a>
+                    <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="{{ path('app_parent') }}">Parent</a>
+                    <a class="py-2 link-body-emphasis text-decoration-none" href="{{ path('app_child_index') }}">Enfant</a>
+                    {% if 'ROLE_ADMIN' in app.user.roles %}
+                    <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="{{ path('app_staff') }}">Personnel</a>
+                    <a class="py-2 link-body-emphasis text-decoration-none" href="{{ path('app_menu_index') }}">Menu</a>
+                    <a class="py-2 link-body-emphasis text-decoration-none" href="{{ path('app_user_index') }}">Admin</a>
+                    {% endif %}
+                    <a class="py-2 link-body-emphasis text-decoration-none" href="{{ path('app_logout') }}">Se deconnecter</a>
+                {% else %}
+                <a class="py-2 link-body-emphasis text-decoration-none" href="{{ path('app_login') }}">Se connecter</a>
+                {% endif %}
             </nav>
             </div>
             
