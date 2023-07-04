@@ -1,0 +1,32 @@
+body {
+    margin: 0;
+}
+
+.bgColorW {
+    background-color: rgba(255, 255, 255, 0.406);
+    border-bottom-left-radius: 40px;
+    border-bottom-right-radius: 40px;
+}
+
+nav a {
+    margin-top: 10px;
+    padding-right: 20px;
+    font-size: 20px;
+}
+
+header {
+    background: url('../img/menu-cantine-2-min-scaled.jpg') no-repeat center;
+    background-size: cover;
+    border-bottom-left-radius: 40px;
+    border-bottom-right-radius: 40px;
+    box-shadow: 0px 0px 4px 3px rgba(0, 0, 0, 0.367);
+    font-family: 'Fasthand', cursive;
+    padding-bottom: 200px;
+}
+
+header h1 {
+    margin-top: 150px;
+    font-size: 70px;
+    color: rgba(0, 0, 0, 0.586);
+    background-color: rgba(255, 255, 255, 0.406);
+}
