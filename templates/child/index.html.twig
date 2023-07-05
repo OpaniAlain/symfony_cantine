@@ -14,6 +14,9 @@
                 <tr>
                     <td>{{ row.firstname }} {{ row.lastname }}</td>
                     <td>{{ row.age }}</td>
+                    <td>
+                        {{ row.user.firstname }} {{ row.user.lastname }} <br>
+                    </td>
                     <td>{{ row.allergy }}</td>
                     <td class='d-flex justify-content-around'>
                         <a href="{{ path('app_child_show', {'id':row.id}) }}" class='btn btn-warning fa-solid fa-magnifying-glass' title='Afficher'></a>

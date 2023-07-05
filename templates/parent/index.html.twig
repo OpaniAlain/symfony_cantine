@@ -14,6 +14,11 @@
             <tr>
                 <td>{{ row.firstname }} {{ row.lastname }}</td>
                 <td>{{ row.email }}</td>
+                <td>
+                {% for child in row.child %}
+                    {{ child.firstname }} {{ child.lastname }} <br>
+                {% endfor %}
+                </td>
                 <td class='d-flex justify-content-around'>
                     <a href="{{ path('app_parent_detail', {'id':row.id}) }}" class='btn btn-warning fa-solid fa-magnifying-glass' title='Afficher'></a>
                     <a href="{{ path('app_parent_edit', {'id':row.id}) }}" class='btn btn-primary fa fa-edit' title='Modification'></a>

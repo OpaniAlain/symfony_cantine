@@ -30,6 +30,8 @@ class ChildController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $childRepository->save($child, true);
+            // ajout message alert quand lenfant ets bien enregistrer
+            $this->addFlash('success', 'vous avez ajouter un enfant avec succes');
 
             return $this->redirectToRoute('app_child_index', [], Response::HTTP_SEE_OTHER);
         }
