@@ -39,6 +39,13 @@ class ChildRepository extends ServiceEntityRepository
         }
     }
 
+    public function countChild() {
+        return $this->createQueryBuilder('c')
+        ->select('count(c.id)')
+        ->orderBy('c.firstname')
+        ->getQuery()
+        ->getSingleScalarResult();
+    }
 //    /**
 //     * @return Child[] Returns an array of Child objects
 //     */

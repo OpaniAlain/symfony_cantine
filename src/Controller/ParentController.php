@@ -19,6 +19,8 @@ class ParentController extends AbstractController
     {
         // Récupération des informations en bdd
         $users = $userRepository->getUserByRole('PARENT');
+
+
         
         // Passage des informations vers la vue
         return $this->render('parent/index.html.twig', [
