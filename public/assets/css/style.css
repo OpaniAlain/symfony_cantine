@@ -33,3 +33,7 @@ header h1 {
     background-color: rgba(255, 255, 255, 0.406);
     box-shadow: 0px 0px 4px 1px rgba(0, 0, 0, 0.367);
 }
+
+.alignCent {
+    align-items: center;
+}

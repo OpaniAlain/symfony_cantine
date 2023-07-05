@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello BookingController!
+{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="./assets/css/calendar.css">
+{% endblock %}
+
+{% block body %}
+
+    <form action="{{ path('app_booking_recap') }}" method="POST">
+        {% for row in child %}
+            <div class="row">
+                <div class="col-12">
+                    <h3>{{ row.firstname }}
+                        {{ row.lastname }}</h3>
+                </div>
+                <div class="calendar calendar-first" id="calendar_first">
+                    <div class="calendar_header">
+                        <button class="switch-month switch-left">
+                            <i class="fa fa-chevron-left"></i>
+                        </button>
+                        <h2>July 2023</h2>
+                        <button class="switch-month switch-right">
+                            <i class="fa fa-chevron-right"></i>
+                        </button>
+                    </div>
+                    <div class="calendar_content">
+                        {% for i in firstDay..lastDay %}
+                            <div>
+                                {{ i }}<br>
+                                <input type="checkbox" name="date_{{row.id}}[]" value="{{ i }}/{{ 'now'|date('m/Y') }}"/>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        <div class="row center">
+            <input type="submit" value="Valider" class="btn btn-primary">
+        </div>
+    </form>
+{% endblock %}
