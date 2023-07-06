@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Child;
 use App\Form\ChildType;
 use App\Repository\ChildRepository;
+use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,10 +15,21 @@ use Symfony\Component\Routing\Annotation\Route;
 class ChildController extends AbstractController
 {
     #[Route('/', name: 'app_child_index', methods: ['GET'])]
-    public function index(ChildRepository $childRepository): Response
+    public function index(ChildRepository $childRepository, UserRepository $userRepository): Response
     {
+        $children = $childRepository->findAll();
+
+        // je test si dans le tableau des roles de mon profil si la valeur ROLE_PARENT existe
+        if (in_array('ROLE_PARENT', $this->getUser()->getRoles())) {
+
+            // si je suis un parent, je vais récupérer dans la bdd
+            // les enfants qui ont en user_id la valeur de mon id de user connecté
+            $children = $childRepository->findBy(['user' => $this->getUser()]);
+        }
+
         return $this->render('child/index.html.twig', [
-            'children' => $childRepository->findAll(),
+            'children' => $children,
+            
         ]);
     }
 

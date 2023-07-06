@@ -71,6 +71,7 @@ class ParentController extends AbstractController
         // Passage des informations vers la vue
         return $this->render('parent/add.html.twig', [
             'form'  => $form->createView(),
+            
         ]);
     }
 

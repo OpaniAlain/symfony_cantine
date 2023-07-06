@@ -5,25 +5,29 @@
 {% block body %}
 
     <div class="container">
-        <a class='btn btn-success mb-2' href="{{ path('app_child_new') }}">Ajouter</a>
-
-
+        {% if 'ROLE_ADMIN' in app.user.roles %}
+            <a class='btn btn-success mb-2' href="{{ path('app_child_new') }}">Ajouter</a>
+        {% endif %}
 
         <table class='table table-bordered'>
             {% for row in children %}
-                <tr>
-                    <td>{{ row.firstname }} {{ row.lastname }}</td>
-                    <td>{{ row.age }}</td>
-                    <td>
-                        {{ row.user.firstname }} {{ row.user.lastname }} <br>
-                    </td>
-                    <td>{{ row.allergy }}</td>
-                    <td class='d-flex justify-content-around'>
-                        <a href="{{ path('app_child_show', {'id':row.id}) }}" class='btn btn-warning fa-solid fa-magnifying-glass' title='Afficher'></a>
-                        <a href="{{ path('app_child_edit', {'id':row.id}) }}" class='btn btn-primary fa fa-edit' title='Modification'></a>
-                        <a href="{{ path('app_child_delete', {'id':row.id}) }}" class='btn btn-danger fa fa-trash' title='Supprimer'></a>
-                    </td>
-                </tr>
+                
+                    <tr>
+                        <td>{{ row.firstname }} {{ row.lastname }}</td>
+                        <td>{{ row.age }}</td>
+                        <td>
+                            {{ row.user.firstname }} {{ row.user.lastname }} <br>
+                        </td>
+                        <td>{{ row.allergy }}</td>
+                        <td class='d-flex justify-content-around'>
+                            <a href="{{ path('app_child_show', {'id':row.id}) }}" class='btn btn-warning fa-solid fa-magnifying-glass' title='Afficher'></a>
+                            <a href="{{ path('app_child_edit', {'id':row.id}) }}" class='btn btn-primary fa fa-edit' title='Modification'></a>
+                            {% if 'ROLE_ADMIN' in app.user.roles %}
+                                <a href="{{ path('app_child_delete', {'id':row.id}) }}" class='btn btn-danger fa fa-trash' title='Supprimer'></a>
+                            {% endif %}
+                        </td>
+                    </tr>
+                
             {% endfor %}
         </table>
     </div>
