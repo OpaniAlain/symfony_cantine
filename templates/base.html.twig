@@ -33,6 +33,7 @@
                     <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="{{ path('app_parent') }}">Parent</a>
                     <a class="py-2 link-body-emphasis text-decoration-none" href="{{ path('app_child_index') }}">Enfant</a>
                     <a class="py-2 link-body-emphasis text-decoration-none" href="{{ path('app_booking') }}">Réservation</a>
+                    <a class="py-2 link-body-emphasis text-decoration-none" href="{{ path('app_booking_show') }}">Mes réservation</a>
                     {% if 'ROLE_ADMIN' in app.user.roles %}
                     <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="{{ path('app_staff') }}">Personnel</a>
                     <a class="py-2 link-body-emphasis text-decoration-none" href="{{ path('app_menu_index') }}">Menu</a>

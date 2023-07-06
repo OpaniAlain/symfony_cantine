@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Booking;
+use App\Entity\Child;
 use App\Repository\BookingRepository;
 use App\Repository\ChildRepository;
 use DateTime;
@@ -116,20 +117,18 @@ class BookingController extends AbstractController
                         $child = $childRepository->findOneById($rowChild->getId());
                         $child->addBooking($booking);
                         $childRepository->save($child, true);
+
                     }
-
-
-
-                }
-                
+                }         
             }
-
         }
-
         $this->addFlash('success', 'Votre commande a bien été prise en compte');
-
         return $this->redirectToRoute('app_home');
-
     }
 
+    #[Route('/bookingshow', name: 'app_booking_show')]
+    public function show(): Response
+    {
+        return $this->render('booking/show.html.twig');
+    }
 }

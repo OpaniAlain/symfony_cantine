@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello BookingController!
+{% endblock %}
+
+{% block stylesheets %}
+{% endblock %}
+
+{% block body %}
+    <div class="container-fluid">
+        <table class="table table-bordered table-striped">
+            <tr>
+                <th>Enfant</th>
+                <th>Date de réservation</th>
+            </tr>
+            {% for child in app.user.child %}
+                
+            <tr>
+                <td>{{ child.firstname }} {{ child.lastname }}</td>
+                
+                <td>{% for booking in child.booking %}{{ booking.date|date('d/m/Y') }}<br>{% endfor %}</td>
+                
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+
+        
+            
+        
+
+    
+
+{% endblock %}

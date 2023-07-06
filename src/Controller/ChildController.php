@@ -56,6 +56,7 @@ class ChildController extends AbstractController
         $form = $this->createForm(ChildType::class, $child);
         $form->handleRequest($request);
 
+
         if ($form->isSubmitted() && $form->isValid()) {
             $childRepository->save($child, true);
 
